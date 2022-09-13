@@ -1,0 +1,31 @@
+version: "3.8"
+
+networks:
+  nw-web-php:
+    driver: bridge
+
+services:
+  # Web & App Server
+  app:
+    container_name: web-php_app
+    build:
+      context: ./.docker/apache
+    privileged: true
+    ports:
+      - 80:80
+    working_dir: /var/www/app
+    volumes:
+      - ./app:/var/www/app
+    networks:
+      - nw-web-php
+
+  # node container
+  node:
+    image: node:slim
+    container_name: web-php_node
+    tty: true
+    working_dir: /var/www/app
+    volumes:
+      - ./app:/var/www/app
+    networks:
+      - nw-web-php
