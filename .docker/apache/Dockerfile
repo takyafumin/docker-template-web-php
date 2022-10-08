@@ -88,5 +88,5 @@ COPY ./files/usr/local/lib/php.ini /usr/local/lib/php.ini
 
 EXPOSE 80
 WORKDIR /var/www/app/public
-ENTRYPOINT [ "docker-php-entrypoint" ]
+ENTRYPOINT [ "/usr/local/bin/docker-php-entrypoint" ]
 CMD ["httpd-foreground"]
